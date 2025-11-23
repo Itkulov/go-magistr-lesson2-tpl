@@ -375,7 +375,7 @@ func (v *Validator) validateCPU(node *yaml.Node, prefix string) {
 		return
 	}
 
-	// ИСПРАВЛЕНИЕ: проверяем что значение можно преобразовать в int
+	// Проверяем что значение можно преобразовать в int
 	if _, err := strconv.Atoi(node.Value); err != nil {
 		v.Errorf(node.Line, "cpu must be int")
 	}
