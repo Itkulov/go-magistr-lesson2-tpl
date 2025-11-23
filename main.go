@@ -153,7 +153,7 @@ func (v *Validator) validateMetadata(node *yaml.Node) {
 	} else if nameNode.Kind != yaml.ScalarNode {
 		v.Errorf(nameNode.Line, "name must be string")
 	} else if nameNode.Value == "" {
-		v.Errorf(nameNode.Line, "name is required")
+		v.Errorf(nameNode.Line, "metadata.name is required")
 	}
 
 	// namespace (optional)
