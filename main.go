@@ -153,7 +153,7 @@ func (v *Validator) validateMetadata(node *yaml.Node) {
 	} else if nameNode.Kind != yaml.ScalarNode {
 		v.Errorf(nameNode.Line, "name must be string")
 	} else if nameNode.Value == "" {
-		v.Errorf(nameNode.Line, "metadata.name is required")
+		v.Errorf(nameNode.Line, "name is required")
 	}
 
 	// namespace (optional)
@@ -375,8 +375,9 @@ func (v *Validator) validateCPU(node *yaml.Node, prefix string) {
 		return
 	}
 
+	// ИСПРАВЛЕНИЕ: проверяем что значение можно преобразовать в int
 	if _, err := strconv.Atoi(node.Value); err != nil {
-		v.Errorf(node.Line, "%s.cpu must be integer", prefix)
+		v.Errorf(node.Line, "cpu must be int")
 	}
 }
 
@@ -438,7 +439,7 @@ func (v *Validator) validateContainerPort(node *yaml.Node) {
 		return
 	}
 
-	// ИСПРАВЛЕНИЕ: проверка на отрицательные значения и 0
+	// Проверка на отрицательные значения и 0
 	if port <= 0 || port >= 65536 {
 		v.Errorf(node.Line, "containerPort value out of range")
 	}
@@ -520,7 +521,7 @@ func (v *Validator) validateProbePort(node *yaml.Node) {
 		return
 	}
 
-	// ИСПРАВЛЕНИЕ: проверка на отрицательные значения и 0
+	// Проверка на отрицательные значения и 0
 	if port <= 0 || port >= 65536 {
 		v.Errorf(node.Line, "port value out of range")
 	}
