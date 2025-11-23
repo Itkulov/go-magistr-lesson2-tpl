@@ -438,6 +438,7 @@ func (v *Validator) validateContainerPort(node *yaml.Node) {
 		return
 	}
 
+	// ИСПРАВЛЕНИЕ: проверка на отрицательные значения и 0
 	if port <= 0 || port >= 65536 {
 		v.Errorf(node.Line, "containerPort value out of range")
 	}
@@ -519,6 +520,7 @@ func (v *Validator) validateProbePort(node *yaml.Node) {
 		return
 	}
 
+	// ИСПРАВЛЕНИЕ: проверка на отрицательные значения и 0
 	if port <= 0 || port >= 65536 {
 		v.Errorf(node.Line, "port value out of range")
 	}
