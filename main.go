@@ -97,7 +97,7 @@ func (v *Validator) validateTopLevel(root *yaml.Node) {
 	if node, exists := fields["apiVersion"]; !exists {
 		v.Errorf(0, "apiVersion is required")
 	} else {
-		v.validateApiVersion(node)
+		v.validateAPIVersion(node)
 	}
 
 	// kind
@@ -122,7 +122,7 @@ func (v *Validator) validateTopLevel(root *yaml.Node) {
 	}
 }
 
-func (v *Validator) validateApiVersion(node *yaml.Node) {
+func (v *Validator) validateAPIVersion(node *yaml.Node) {
 	if node.Value != "v1" {
 		v.Errorf(node.Line, "apiVersion has unsupported value '%s'", node.Value)
 	}
