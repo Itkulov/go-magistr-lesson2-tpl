@@ -290,6 +290,12 @@ func (v *Validator) validateContainerName(node *yaml.Node, names map[string]bool
 		return
 	}
 
+	// Проверка на пустую строку
+	if node.Value == "" {
+		v.Errorf(node.Line, "name is required")
+		return
+	}
+
 	// Проверка формата snake_case
 	snakeCaseRegex := regexp.MustCompile(`^[a-z]+(_[a-z]+)*$`)
 	if !snakeCaseRegex.MatchString(node.Value) {
